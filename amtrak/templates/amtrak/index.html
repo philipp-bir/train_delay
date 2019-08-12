@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en_US">
+<head>
+<title>Train - delay
+</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#id_departure_day" ).datepicker();
+    
+      $("#trainform").submit(function(event) {
+
+    event.preventDefault(); // avoid to execute the actual submit of the form.
+    //alert(e);
+    var form = $(this);
+    var url = form.attr('action');
+    //var train_id=$("#id_train_id").val();
+    //var departure_timestamp=Date.parse(.val())/1000;
+    //alert(form.serialize());
+    //var url = 
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               //alert(data); // show response from the php script.
+               $("#result").html("Estimate: "+data["estimate"]);
+               console.log(data);
+           }
+         });
+
+
+    });
+  } 
+  
+  
+  );
+  
+
+  
+  </script>
+</head>
+<body>
+<form id="trainform" action="predict/post" method="post">
+{% csrf_token %}
+<table>
+{{form}}
+<tr><th></th><td><button type="submit">Submit</button></td></tr>
+</table>
+</form>
+<div id="result">
+
+</div>
+</body>
+</html>
