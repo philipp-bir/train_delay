@@ -22,6 +22,6 @@ def prediction_post(request):
         if form.is_valid():
             d=form.cleaned_data["departure_day"]
             timestamp=int(datetime.datetime(d.year,d.month,d.day).timestamp())
-            train_id=form.cleaned_data["train_id"]
+            train_id=form.cleaned_data["train_id"].train_id
             prediction=predict_train(train_id,timestamp)
             return JsonResponse(prediction)

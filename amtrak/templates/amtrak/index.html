@@ -9,6 +9,10 @@
   $( function() {
     $( "#id_departure_day" ).datepicker();
     
+    $(".submit-on-change").change(function() {
+        $('#submit').click();
+    });
+    
       $("#trainform").submit(function(event) {
 
     event.preventDefault(); // avoid to execute the actual submit of the form.
@@ -27,7 +31,7 @@
            success: function(data)
            {
                //alert(data); // show response from the php script.
-               $("#result").html("Estimate: "+data["estimate"]);
+               $("#result").html("70% chance that the train is between "+Math.round(data["estimate_below"])+" and "+Math.round(data["estimate_above"])+" minutes late.");
                console.log(data);
            }
          });
@@ -48,7 +52,7 @@
 {% csrf_token %}
 <table>
 {{form}}
-<tr><th></th><td><button type="submit">Submit</button></td></tr>
+<tr><th></th><td><button type="submit" id="submit">Submit</button></td></tr>
 </table>
 </form>
 <div id="result">
