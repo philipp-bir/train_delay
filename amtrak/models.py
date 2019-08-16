@@ -10,6 +10,8 @@ class TrainData(models.Model):
     departure_time_of_day = models.IntegerField(default=0)
     interval_below = models.FloatField()
     interval_above = models.FloatField()
+    origin = models.TextField(null=True)
+    destination = models.TextField(null=True)
     
     def __str__(self):
-        return self.train_id
+        return f"{self.train_id} [{self.origin} - {self.destination}]"

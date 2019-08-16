@@ -22,6 +22,8 @@ class Command(BaseCommand):
                     interval_below=row["lower"],
                     interval_above=row["upper"],
                     departure_time_of_day=row["scheduled_dep_time_of_day"],
+                    origin=row["origin"],
+                    destination=row["destination"],
                 )
                 all_train_data+=[td]
             TrainData.objects.bulk_create(all_train_data)
