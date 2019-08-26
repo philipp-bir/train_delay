@@ -45,7 +45,9 @@
                    time_text="on time or up to "+upper+" minutes late.";
                }
                $("#result").html("Your train arrives "+time_text);
-               console.log(data);
+           },
+           error: function(){
+               $("#result").html("ERROR! Try again.");
            }
          });
 
@@ -193,7 +195,7 @@ fieldset {
 </head>
 <body>
 <div class="container">  
-  <form id="trainform" action="predict/post" method="post">
+  <form id="trainform" action="{% url 'prediction_post' %}" method="post">
       {% csrf_token %}
     <h3>Amtrak train delay prediction</h3>
     <fieldset>
